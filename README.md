@@ -5,7 +5,8 @@ Perti Net
 
 ## Getting started
 
-This example will create the following P/T_system: ![P/T_system](docs/images/1.png)
+This example will create the following P/T_system: 
+![P/T_system](docs/images/1.png)
 
 ### Builder
 
@@ -48,7 +49,8 @@ $enabledTransitions = $net->getEnabledTransitions();
 $net->fire($enabledTransitions[0]);
 ```
 
-After fire t1, we got a new marking: ![P/T_system](docs/images/2.png)
+After fire t1, we got a new marking: 
+![P/T_system](docs/images/2.png)
 
 ```php
 // ['t2', 't3']
@@ -56,7 +58,8 @@ $enabledTransitions = $net->getEnabledTransitions();
 $net->fire($t2);
 ```
 
-After fire t2, we got another new marking: ![P/T_system](docs/images/3.png)
+After fire t2, we got another new marking: 
+![P/T_system](docs/images/3.png)
 
 ```php
 // ['t3']
