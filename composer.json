@@ -1,0 +1,19 @@
+{
+    "name": "ziguss/petrinet",
+    "type": "library",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ziguss",
+            "email": "yudoujia@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": { "ziguss\\petrinet\\": "" }
+    },
+    "minimum-stability": "dev"
+}
