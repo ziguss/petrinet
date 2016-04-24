@@ -14,7 +14,7 @@ use ziguss\petrinet\exception\TransitionNotEnabledException;
 /**
  * place/transition system
  * 
- * @author yudoudou <yudoudou@baidu.com>
+ * @author ziguss <yudoujia@163.com>
  */
 class PTSystem
 {

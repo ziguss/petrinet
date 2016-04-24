@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author yudoudou <yudoudou@baidu.com>
+ * @author ziguss <yudoujia@163.com>
  * @date 16/4/24
  */
 

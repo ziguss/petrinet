@@ -8,7 +8,7 @@ use ziguss\petrinet\Place;
 use ziguss\petrinet\Transition;
 
 /**
- * @author yudoudou <yudoudou@baidu.com>
+ * @author ziguss <yudoujia@163.com>
  */
 class DirectedNet
 {

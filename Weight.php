@@ -5,7 +5,7 @@ namespace ziguss\petrinet;
 /**
  * Weight Function
  * 
- * @author yudoudou <yudoudou@baidu.com>
+ * @author ziguss <yudoujia@163.com>
  */
 class Weight
 {

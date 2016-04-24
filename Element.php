@@ -3,7 +3,7 @@
 namespace ziguss\petrinet;
 
 /**
- * @author yudoudou <yudoudou@baidu.com>
+ * @author ziguss <yudoujia@163.com>
  */
 abstract class Element
 {
