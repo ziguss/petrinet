@@ -47,7 +47,6 @@ class Weight
             $this->arcs[$arc] = $weight;
         }
         
-        $this->arcs[$arc] = $weight;
         return $this;
     }
 }
