@@ -13,13 +13,13 @@ use ziguss\petrinet\exception\TransitionNotEnabledException;
 
 /**
  * place/transition system
- * 
+ *
  * @author ziguss <yudoujia@163.com>
  */
 class PTSystem
 {
     use Nameable;
-    
+
     protected $directedNet;
     protected $capacity;
     protected $weight;
@@ -28,7 +28,7 @@ class PTSystem
 
     /**
      * PTSystem constructor.
-     * 
+     *
      * @param DirectedNet $directedNet
      * @param Capacity $capacity
      * @param Weight $weight
@@ -39,7 +39,8 @@ class PTSystem
         Capacity $capacity,
         Weight $weight,
         Marking $marking
-    ) {
+    )
+    {
         $this->directedNet = $directedNet;
         $this->capacity = $capacity;
         $this->weight = $weight;
@@ -76,7 +77,7 @@ class PTSystem
      */
     public function getTokens(Place $place)
     {
-       return $this->marking->getTokens($place); 
+        return $this->marking->getTokens($place);
     }
 
     /**
@@ -96,10 +97,10 @@ class PTSystem
     {
         return $this->weight->getWeight($arc);
     }
-    
+
     /**
      * Get all enabled transitions
-     * 
+     *
      * @return Transition[]
      */
     public function getEnabledTransitions()
@@ -108,7 +109,9 @@ class PTSystem
 
         foreach ($this->marking->getPlaces() as $place) {
             foreach ($place->getOutputArcs() as $arc) {
-                if ($this->isEnabled($arc->getTransition())) {
+                if (array_search($arc->getTransition(), $transitions, true) === false &&
+                    $this->isEnabled($arc->getTransition())
+                ) {
                     $transitions[] = $arc->getTransition();
                 }
             }
@@ -119,7 +122,7 @@ class PTSystem
 
     /**
      * Check if a given transition is enabled.
-     * 
+     *
      * @param Transition $transition
      * @return bool
      */
@@ -160,7 +163,7 @@ class PTSystem
 
     /**
      * Fire a transition
-     * 
+     *
      * @param Transition $transition
      * @return $this
      * @throws \Exception
@@ -201,7 +204,7 @@ class PTSystem
                 }
             }
         }
-        
+
         return $this->zeroInputTransitions;
     }
 }
