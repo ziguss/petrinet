@@ -3,7 +3,7 @@
 namespace ziguss\petrinet;
 
 /**
- * Capacity Function
+ * Capacity Function.
  *
  * @author ziguss <yudoujia@163.com>
  */
@@ -18,6 +18,7 @@ class Capacity
 
     /**
      * @param Place $place
+     *
      * @return int
      */
     public function getCapacity(Place $place)
@@ -31,7 +32,8 @@ class Capacity
 
     /**
      * @param Place $place
-     * @param int $capacity
+     * @param int   $capacity
+     *
      * @return $this
      */
     public function setCapacity(Place $place, $capacity)
@@ -41,8 +43,10 @@ class Capacity
             throw new \InvalidArgumentException('The capacity must be a positive integer.');
         }
 
-        $this->places[$place] = $capacity;
-        
+        if ($capacity !== PHP_INT_MAX) {
+            $this->places[$place] = $capacity;
+        }
+
         return $this;
     }
 }

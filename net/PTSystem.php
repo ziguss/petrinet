@@ -12,7 +12,7 @@ use ziguss\petrinet\Weight;
 use ziguss\petrinet\exception\TransitionNotEnabledException;
 
 /**
- * place/transition system
+ * place/transition system.
  *
  * @author ziguss <yudoujia@163.com>
  */
@@ -30,17 +30,16 @@ class PTSystem
      * PTSystem constructor.
      *
      * @param DirectedNet $directedNet
-     * @param Capacity $capacity
-     * @param Weight $weight
-     * @param Marking $marking
+     * @param Capacity    $capacity
+     * @param Weight      $weight
+     * @param Marking     $marking
      */
     public function __construct(
         DirectedNet $directedNet,
         Capacity $capacity,
         Weight $weight,
         Marking $marking
-    )
-    {
+    ) {
         $this->directedNet = $directedNet;
         $this->capacity = $capacity;
         $this->weight = $weight;
@@ -73,6 +72,7 @@ class PTSystem
 
     /**
      * @param Place $place
+     *
      * @return int
      */
     public function getTokens(Place $place)
@@ -82,6 +82,7 @@ class PTSystem
 
     /**
      * @param Place $place
+     *
      * @return int
      */
     public function getCapacity(Place $place)
@@ -91,6 +92,7 @@ class PTSystem
 
     /**
      * @param Arc $arc
+     *
      * @return int
      */
     public function getWeight(Arc $arc)
@@ -99,7 +101,7 @@ class PTSystem
     }
 
     /**
-     * Get all enabled transitions
+     * Get all enabled transitions.
      *
      * @return Transition[]
      */
@@ -109,21 +111,20 @@ class PTSystem
 
         foreach ($this->marking->getPlaces() as $place) {
             foreach ($place->getOutputArcs() as $arc) {
-                if (array_search($arc->getTransition(), $transitions, true) === false &&
-                    $this->isEnabled($arc->getTransition())
-                ) {
+                if (array_search($arc->getTransition(), $transitions, true) === false) {
                     $transitions[] = $arc->getTransition();
                 }
             }
         }
 
-        return $transitions;
+        return array_filter($transitions, [$this, 'isEnabled']);
     }
 
     /**
      * Check if a given transition is enabled.
      *
      * @param Transition $transition
+     *
      * @return bool
      */
     public function isEnabled(Transition $transition)
@@ -162,10 +163,12 @@ class PTSystem
     }
 
     /**
-     * Fire a transition
+     * Fire a transition.
      *
      * @param Transition $transition
+     *
      * @return $this
+     *
      * @throws \Exception
      */
     public function fire(Transition $transition)
@@ -198,7 +201,7 @@ class PTSystem
     {
         if (null === $this->zeroInputTransitions) {
             $this->zeroInputTransitions = [];
-            foreach ($this->directedNet->getTransitions() as $transition) {
+            foreach ($this->getTransitions() as $transition) {
                 if (count($transition->getInputArcs()) === 0) {
                     $this->zeroInputTransitions[] = $transition;
                 }

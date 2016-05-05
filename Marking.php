@@ -23,11 +23,13 @@ class Marking
         foreach ($this->places as $place) {
             $places[] = $place;
         }
+
         return $places;
     }
-    
+
     /**
      * @param Place $place
+     *
      * @return int
      */
     public function getTokens(Place $place)
@@ -41,7 +43,8 @@ class Marking
 
     /**
      * @param Place $place
-     * @param int $tokens
+     * @param int   $tokens
+     *
      * @return $this
      */
     public function setTokens(Place $place, $tokens)
@@ -50,13 +53,13 @@ class Marking
         if ($tokens < 0) {
             throw new \InvalidArgumentException('The tokens must be a non-negative integer.');
         }
-        
+
         if ($tokens === 0) {
             $this->places->detach($place);
         } else {
             $this->places[$place] = $tokens;
         }
-        
+
         return $this;
     }
 }

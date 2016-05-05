@@ -8,7 +8,7 @@ namespace ziguss\petrinet;
 abstract class Element
 {
     use Nameable;
-    
+
     protected $inputArcs = [];
     protected $outputArcs = [];
 
@@ -19,17 +19,19 @@ abstract class Element
     {
         return $this->inputArcs;
     }
-    
+
     /**
      * @param Arc $inputArc
+     *
      * @return $this
      */
     public function addInputArc(Arc $inputArc)
     {
         $this->inputArcs[] = $inputArc;
+
         return $this;
     }
-    
+
     /**
      * @return Arc[]
      */
@@ -37,14 +39,16 @@ abstract class Element
     {
         return $this->outputArcs;
     }
-    
+
     /**
      * @param Arc $outputArc
+     *
      * @return $this
      */
     public function addOutputArc(Arc $outputArc)
     {
         $this->outputArcs[] = $outputArc;
+
         return $this;
     }
 }

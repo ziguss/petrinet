@@ -3,7 +3,6 @@
 namespace ziguss\petrinet\net;
 
 use ziguss\petrinet\Arc;
-use ziguss\petrinet\Element;
 use ziguss\petrinet\Place;
 use ziguss\petrinet\Transition;
 
@@ -20,24 +19,33 @@ class DirectedNet
     /**
      * DirectedNet constructor.
      *
-     * @param Place[] $places
+     * @param Place[]      $places
      * @param Transition[] $transitions
-     * @param Arc[] $arcs
+     * @param Arc[]        $arcs
      */
     public function __construct(array $places, array $transitions, array $arcs)
     {
-        if (empty($places) && empty($transitions)) {
-            throw new \InvalidArgumentException('A directed net must not be empty.');
-        }
+        $count = count($places) + count($transitions);
 
-        /**
-         * @var Element $element
-         */
-        foreach ([$places, $transitions] as $elements) {
-            foreach ($elements as $element) {
-                if (empty($element->getInputArcs()) && empty($element->getOutputArcs())) {
-                    throw new \InvalidArgumentException('An place/transition must not be isolated.');
+        if ($count === 0) {
+            throw new \InvalidArgumentException('A net must not be empty.');
+        } elseif ($count !== 1) {
+            $elements = new \SplObjectStorage();
+            foreach ($arcs as $arc) {
+                $elements->attach($arc->getSource());
+                $elements->attach($arc->getTarget());
+            }
+
+            foreach (array_merge($places, $transitions) as $element) {
+                if ($elements->contains($element)) {
+                    $elements->detach($element);
+                } else {
+                    throw new \InvalidArgumentException('A place or a transition must not be isolated.');
                 }
+            }
+
+            if ($elements->count() !== 0) {
+                throw new \InvalidArgumentException('Invalid flow relation');
             }
         }
 

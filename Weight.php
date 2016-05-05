@@ -3,7 +3,7 @@
 namespace ziguss\petrinet;
 
 /**
- * Weight Function
+ * Weight Function.
  * 
  * @author ziguss <yudoujia@163.com>
  */
@@ -18,6 +18,7 @@ class Weight
 
     /**
      * @param Arc $arc
+     *
      * @return int
      */
     public function getWeight(Arc $arc)
@@ -29,9 +30,17 @@ class Weight
         }
     }
 
+    /*
+    public function getWeight(Element $source, Element $target)
+    {
+
+    }
+    */
+
     /**
      * @param Arc $arc
      * @param int $weight
+     *
      * @return $this
      */
     public function setWeight(Arc $arc, $weight)
@@ -40,13 +49,13 @@ class Weight
         if ($weight < 1) {
             throw new \InvalidArgumentException('The weight must be a positive integer.');
         }
-        
+
         if ($weight === 1) {
             $this->arcs->detach($arc);
         } else {
             $this->arcs[$arc] = $weight;
         }
-        
+
         return $this;
     }
 }

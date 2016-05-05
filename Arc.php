@@ -9,10 +9,44 @@ class Arc
 {
     const PLACE_TRANSITION = 0;
     const TRANSITION_PLACE = 1;
-    
+
     protected $place;
     protected $transition;
     protected $direct;
+
+    public function __construct(Element $source, Element $target, $direct)
+    {
+        if ($direct === self::PLACE_TRANSITION) {
+            $this->place = $source;
+            $this->transition = $target;
+        } elseif ($direct === self::TRANSITION_PLACE) {
+            $this->transition = $source;
+            $this->place = $target;
+        } else {
+            throw new \InvalidArgumentException('Invalid arc direct "'.$direct.'"');
+        }
+        $this->direct = $direct;
+    }
+
+    /**
+     * @return Element
+     */
+    public function getSource()
+    {
+        return $this->direct === self::PLACE_TRANSITION ?
+            $this->getPlace() :
+            $this->getTransition();
+    }
+
+    /**
+     * @return Element
+     */
+    public function getTarget()
+    {
+        return $this->direct === self::TRANSITION_PLACE ?
+            $this->getPlace() :
+            $this->getTransition();
+    }
 
     /**
      * @return Place
@@ -20,16 +54,6 @@ class Arc
     public function getPlace()
     {
         return $this->place;
-    }
-    
-    /**
-     * @param Place $place
-     * @return $this
-     */
-    public function setPlace(Place $place)
-    {
-        $this->place = $place;
-        return $this;
     }
 
     /**
@@ -41,30 +65,10 @@ class Arc
     }
 
     /**
-     * @param Transition $transition
-     * @return $this
-     */
-    public function setTransition(Transition $transition)
-    {
-        $this->transition = $transition;
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getDirect()
     {
         return $this->direct;
-    }
-    
-    /**
-     * @param int $direct
-     * @return $this
-     */
-    public function setDirect($direct)
-    {
-        $this->direct = $direct;
-        return $this;
     }
 }
